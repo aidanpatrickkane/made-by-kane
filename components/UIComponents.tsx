@@ -48,7 +48,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     // If asChild is true and the child is a valid element (e.g. <Link>),
     // clone it to merge our classes while preserving the original tag.
     if (asChild && isValidElement(children)) {
-      const child = children as ReactElement<{ className?: string }, string | React.JSXElementConstructor<any>>;
+      const child = children as ReactElement<{ className?: string }, string | React.JSXElementConstructor<unknown>>;
       return cloneElement(child, {
         className: cn(child.props.className, classes),
       })
