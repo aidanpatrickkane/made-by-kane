@@ -39,10 +39,10 @@ const testimonials = [
     avatar: "/fromm-photo.png",
   },
   {
-    quote: "Our podcast traffic doubled after the new landing page went live — couldn't be happier.",
-    author: "James P.",
-    company: "The Fast Lane Podcast",
-    avatar: "/placeholder.svg?height=60&width=60",
+    quote: "Aidan created a specific, elaborate and creative map for me...highly recommend!",
+    author: "Chandler W.",
+    company: "Chandler Whitley Realty",
+    avatar: "/chandler-whitley.png",
   },
 ]
 
