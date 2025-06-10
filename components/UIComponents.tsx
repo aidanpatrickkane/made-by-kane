@@ -48,7 +48,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
     // If asChild is true and the child is a valid element (e.g. <Link>),
     // clone it to merge our classes while preserving the original tag.
     if (asChild && isValidElement(children)) {
-      const child = children as ReactElement<any, any>
+      const child = children as ReactElement<{ className?: string }, string | React.JSXElementConstructor<any>>;
       return cloneElement(child, {
         className: cn(child.props.className, classes),
       })
@@ -67,9 +67,7 @@ Button.displayName = "Button"
    🟩  Card + subcomponents
    ---------------------------------------------------------------------*/
 
-interface CardProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-export const Card = forwardRef<HTMLDivElement, CardProps>(({ className, children, ...props }, ref) => (
+export const Card = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(({ className, children, ...props }, ref) => (
   <div
     ref={ref}
     className={cn(
@@ -83,18 +81,14 @@ export const Card = forwardRef<HTMLDivElement, CardProps>(({ className, children
 ))
 Card.displayName = "Card"
 
-interface CardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-export const CardHeader = forwardRef<HTMLDivElement, CardHeaderProps>(({ className, children, ...props }, ref) => (
+export const CardHeader = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(({ className, children, ...props }, ref) => (
   <div ref={ref} className={cn("p-6 pb-0", className)} {...props}>
     {children}
   </div>
 ))
 CardHeader.displayName = "CardHeader"
 
-interface CardContentProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-export const CardContent = forwardRef<HTMLDivElement, CardContentProps>(({ className, children, ...props }, ref) => (
+export const CardContent = forwardRef<HTMLDivElement, React.HTMLAttributes<HTMLDivElement>>(({ className, children, ...props }, ref) => (
   <div ref={ref} className={cn("p-6", className)} {...props}>
     {children}
   </div>
