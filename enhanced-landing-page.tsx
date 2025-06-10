@@ -106,19 +106,18 @@ export default function EnhancedLandingPage() {
         </nav>
       </header>
 
-      {/* ───────────────────────── Hero ──────────────────────────── */}
-      <section className="relative isolate overflow-hidden min-h-[90vh] flex items-center">
+      <section className="relative isolate overflow-hidden min-h-[90vh] flex items-center w-full">
         {/* Enhanced gradient backdrop */}
         <div className="absolute inset-0 bg-gradient-to-br from-sky-50 via-white to-indigo-50" />
 
-        {/* Animated background elements */}
-        <div className="absolute -top-40 -left-40 w-80 h-80 rounded-full bg-gradient-to-br from-sky-200 to-sky-300 opacity-30 blur-3xl animate-pulse" />
+        {/* Animated background elements - Mobile friendly */}
+        <div className="absolute -top-20 -left-20 md:-top-40 md:-left-40 w-60 h-60 md:w-80 md:h-80 rounded-full bg-gradient-to-br from-sky-200 to-sky-300 opacity-30 blur-3xl animate-pulse" />
         <div
-          className="absolute -bottom-40 -right-40 w-96 h-96 rounded-full bg-gradient-to-br from-indigo-200 to-purple-300 opacity-20 blur-3xl animate-pulse"
+          className="absolute -bottom-20 -right-20 md:-bottom-40 md:-right-40 w-72 h-72 md:w-96 md:h-96 rounded-full bg-gradient-to-br from-indigo-200 to-purple-300 opacity-20 blur-3xl animate-pulse"
           style={{ animationDelay: "1s" }}
         />
         <div
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full bg-gradient-to-br from-sky-100 to-indigo-100 opacity-20 blur-3xl animate-pulse"
+          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] md:w-[600px] md:h-[600px] rounded-full bg-gradient-to-br from-sky-100 to-indigo-100 opacity-20 blur-3xl animate-pulse"
           style={{ animationDelay: "2s" }}
         />
 
@@ -136,7 +135,7 @@ export default function EnhancedLandingPage() {
           style={{ animationDelay: "2.5s" }}
         />
 
-        <div className="relative z-10 flex flex-col items-center text-center px-6 py-20 gap-8 max-w-6xl mx-auto">
+        <div className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 py-20 gap-6 md:gap-8 max-w-6xl mx-auto w-full">
           <div className="inline-flex items-center px-4 py-2 rounded-full bg-white/70 backdrop-blur-sm border border-sky-200 text-sky-700 text-sm font-medium mb-4 shadow-lg">
             <span className="w-2 h-2 bg-green-400 rounded-full mr-2 animate-pulse"></span>
             Available for new projects
@@ -167,19 +166,19 @@ export default function EnhancedLandingPage() {
               asChild
               className="backdrop-blur-sm bg-white/70 hover:bg-white/90 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300"
             >
-              <Link href="https://calendly.com/kaneaidan12/made-by-kane-chat">Free Strategy Call</Link>
+              <Link href="#contact">Free Strategy Call</Link>
             </Button>
           </div>
 
           {/* Trust indicators */}
-          <div className="flex items-center gap-8 mt-12 text-slate-500 text-sm">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mt-12 text-slate-500 text-sm">
             <div className="flex items-center gap-2">
               <span className="text-yellow-400">⭐⭐⭐⭐⭐</span>
               <span>5.0 Client Rating</span>
             </div>
-            <div className="w-px h-4 bg-slate-300" />
+            <div className="hidden sm:block w-px h-4 bg-slate-300" />
             <div>15+ Projects Delivered</div>
-            <div className="w-px h-4 bg-slate-300" />
+            <div className="hidden sm:block w-px h-4 bg-slate-300" />
             <div>100% Client Satisfaction</div>
           </div>
         </div>
@@ -230,7 +229,7 @@ export default function EnhancedLandingPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent">
-              Recent Projects
+              Featured Projects
             </h2>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto">
               Real results for real businesses. Each project tells a story of growth and success.
