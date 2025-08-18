@@ -1,5 +1,8 @@
+"use client"
+
 import Image from "next/image"
 import Link from "next/link"
+import { useState, useRef } from "react"
 import { Button, Card, CardContent, CardHeader } from "./components/UIComponents"
 
 /* Enhanced accent colors for more visual depth */
@@ -7,13 +10,15 @@ const ACCENT = "sky-500"
 
 /* ---------------------------- Data (mock) ----------------------------- */
 
-const projects = [
+const featuredProjects = [
   {
     name: "Classic Team Realty",
     link: "https://classicteamrealty.com",
     image: "/classic-realty.png",
     description: "A welcoming online experience helping families effortlessly find their next home.",
     tech: ["Instagram Integration", "Custom Listings Search Bar"],
+    category: "Web Development",
+    featured: true,
   },
   {
     name: "Fromm Scratch",
@@ -21,6 +26,8 @@ const projects = [
     image: "/fromm-scratch.png",
     description: "A warm and inviting baking and lifestyle blog by Caroline Fromm.",
     tech: ["Squarespace", "SEO Optimization", "Responsive Design"],
+    category: "Web Development",
+    featured: true,
   },
   {
     name: "Friend Group Leader",
@@ -28,8 +35,51 @@ const projects = [
     image: "/friend-group-leader.png",
     description: "A mobile app for generating comedic group photo insights using custom AI analysis.",
     tech: ["React Native", "Expo", "Firebase", "OpenAI API"],
+    category: "App Development",
+    featured: true,
   },
 ]
+
+const additionalProjects = [
+  {
+    name: "Mitch Harris",
+    link: "https://mitchharris.com",
+    image: "/mitch-harris-hero.png",
+    description: "An online showcase for Mitch Harris highlighting his journey from Navy veteran to MLB pitcher, speaker, and author, while promoting his new book.",
+    tech: ["Custom Shop", "Booking Form"],
+    category: "Web Development",
+    featured: false,
+  },
+  {
+    name: "ROAM Performance",
+    link: "https://useroamperformance.com",
+    image: "/roam-hero.png",
+    description: "A sleek, high-converting SaaS landing page that showcases their real-time goal tracking and custom reward platform.",
+    tech: ["Next.js", "Framer Motion", "Tailwind CSS"],
+    category: "Web Development",
+    featured: false,
+  },
+  {
+    name: "Safeguard Solutions",
+    link: "https://safeguard-property.com",
+    image: "/safeguard-hero.png",
+    description: "A clean marketing site for Safeguard Property Solutions highlighting their trusted commercial roofing services.",
+    tech: ["Squarespace", "SEO Optimization", "Responsive Design"],
+    category: "Web Development",
+    featured: false,
+  },
+  {
+    name: "Nashville Maps",
+    link: "https://motley-stealer-5b1.notion.site/Nashville-TN-Real-Estate-Listing-Maps-2531d8dcfa7e80c69e4de761e4912f41?source=copy_link",
+    image: "/whitley-maps.png",
+    description: "Designed two compelling and informative interactive property maps for Nashville, Tennessee real estate listings.",
+    tech: ["Figma"],
+    category: "UI/UX Design",
+    featured: false,
+  },
+];
+
+const allProjects = [...featuredProjects, ...additionalProjects]
 
 const testimonials = [
   {
@@ -76,6 +126,46 @@ const services = [
 /* ----------------------------- Component ------------------------------ */
 
 export default function EnhancedLandingPage() {
+  const [showAllProjects, setShowAllProjects] = useState(false)
+  const [selectedCategory, setSelectedCategory] = useState("All")
+  const [isTransitioning, setIsTransitioning] = useState(false)
+  const viewAllButtonRef = useRef<HTMLDivElement>(null)
+  const projectsRef = useRef<HTMLDivElement>(null);
+
+  const categories = ["All", "Web Development", "App Development", "UI/UX Design"]
+
+  const filteredProjects =
+    selectedCategory === "All" ? allProjects : allProjects.filter((project) => project.category === selectedCategory)
+
+  const displayedProjects = showAllProjects ? filteredProjects : featuredProjects
+
+  const handleViewAllProjects = () => {
+  if (!showAllProjects) {
+    setIsTransitioning(true);
+    setShowAllProjects(true);
+    setSelectedCategory("All");
+
+    // wait for React commit + browser paint, then scroll
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (projectsRef.current) {
+          const y = projectsRef.current.offsetTop + 120; // push a bit below the top
+          window.scrollTo({ top: y, behavior: "smooth" });
+        }
+        setIsTransitioning(false);
+      });
+    });
+  } else {
+    setIsTransitioning(true);
+    viewAllButtonRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+    setTimeout(() => {
+      setShowAllProjects(false);
+      setSelectedCategory("All");
+      setIsTransitioning(false);
+    }, 300);
+  }
+};
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 font-sans flex flex-col overflow-x-hidden">
       {/* ───────────────────────── Navbar ────────────────────────── */}
@@ -225,23 +315,57 @@ export default function EnhancedLandingPage() {
       </section>
 
       {/* ─────────────────────── Projects ────────────────────────── */}
-      <section id="projects" className="bg-gradient-to-br from-slate-50 to-sky-50 py-24 px-6">
+      <section id="projects" ref={projectsRef} className="bg-gradient-to-br from-slate-50 to-sky-50 py-24 px-6">
         <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-16">
+          <div
+            className={`text-center mb-16 transition-all duration-700 ${isTransitioning ? "opacity-50 transform translate-y-2" : "opacity-100 transform translate-y-0"}`}
+          >
             <h2 className="text-5xl font-bold mb-6 bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent">
-              Featured Projects
+              {showAllProjects ? "All Projects" : "Featured Projects"}
             </h2>
             <p className="text-xl text-slate-600 max-w-2xl mx-auto">
-              Real results for real businesses. Each project tells a story of growth and success.
+              {showAllProjects
+                ? "Explore my complete portfolio of digital solutions across various industries."
+                : "Real results for real businesses. Each project tells a story of growth and success."}
             </p>
           </div>
 
-          <div className="grid gap-10 md:grid-cols-3">
-            {projects.map((project, index) => (
+          {/* Category Filter - Only show when viewing all projects */}
+          <div
+            className={`transition-all duration-700 overflow-hidden ${
+              showAllProjects && !isTransitioning ? "max-h-32 opacity-100 mb-12" : "max-h-0 opacity-0 mb-0"
+            }`}
+          >
+            <div className="flex flex-wrap justify-center gap-3 py-4">
+              {categories.map((category) => (
+                <button
+                  key={category}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                    selectedCategory === category
+                      ? "bg-sky-500 text-white shadow-lg"
+                      : "bg-white text-slate-600 hover:bg-sky-50 hover:text-sky-600 shadow-sm"
+                  }`}
+                >
+                  {category}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div
+            className={`grid gap-10 transition-all duration-700 ${
+              showAllProjects ? "md:grid-cols-2 lg:grid-cols-3" : "md:grid-cols-3"
+            } ${isTransitioning ? "opacity-50 transform translate-y-4" : "opacity-100 transform translate-y-0"}`}
+          >
+            {displayedProjects.map((project, index) => (
               <Card
                 key={project.name}
                 className="group hover:shadow-2xl hover:-translate-y-3 transition-all duration-500 border-0 shadow-lg overflow-hidden bg-white"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                style={{
+                  animationDelay: `${index * 0.1}s`,
+                  transitionDelay: isTransitioning ? "0ms" : `${index * 50}ms`,
+                }}
               >
                 <CardHeader className="p-0 relative overflow-hidden">
                   <Link href={project.link} target="_blank" rel="noopener noreferrer">
@@ -268,7 +392,12 @@ export default function EnhancedLandingPage() {
                   </Link>
                 </CardHeader>
                 <CardContent className="p-6 space-y-4">
-                  <h3 className="font-bold text-xl text-slate-900">{project.name}</h3>
+                  <div className="flex items-center justify-between">
+                    <h3 className="font-bold text-xl text-slate-900">{project.name}</h3>
+                    <span className="text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded-full">
+                      {project.category}
+                    </span>
+                  </div>
                   <p className="text-slate-600 text-sm leading-relaxed">{project.description}</p>
                   <div className="flex flex-wrap gap-2">
                     {project.tech.map((tech) => (
@@ -281,7 +410,7 @@ export default function EnhancedLandingPage() {
                     variant="outline"
                     size="sm"
                     asChild
-                    className="w-full group-hover:bg-sky-50 transition-colors"
+                    className="w-full group-hover:bg-sky-50 transition-colors bg-transparent"
                   >
                     <Link href={project.link} target="_blank" rel="noopener noreferrer">
                       Visit Site ↗
@@ -290,6 +419,34 @@ export default function EnhancedLandingPage() {
                 </CardContent>
               </Card>
             ))}
+          </div>
+          {/* Show More/Less Button */}
+          <div ref={viewAllButtonRef} className="text-center mt-16">
+            <Button
+              onClick={handleViewAllProjects}
+              disabled={isTransitioning}
+              size="lg"
+              variant="outline"
+              className={`shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 ${
+                isTransitioning ? "opacity-50 cursor-not-allowed" : ""
+              }`}
+            >
+              {showAllProjects ? (
+                <>
+                  <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
+                  </svg>
+                  Show Featured Only
+                </>
+              ) : (
+                <>
+                  View All Projects
+                  <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </>
+              )}
+            </Button>
           </div>
         </div>
       </section>
