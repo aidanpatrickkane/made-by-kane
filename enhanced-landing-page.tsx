@@ -465,7 +465,7 @@ export default function EnhancedLandingPage() {
               disabled={isTransitioning}
               size="lg"
               variant="outline"
-              className={`shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 ${
+              className={`shadow-lg hover:shadow-xl hover:cursor-pointer hover:scale-105 transition-all duration-300 ${
                 isTransitioning ? "opacity-50 cursor-not-allowed" : ""
               }`}
             >
