@@ -69,6 +69,15 @@ const additionalProjects = [
     featured: false,
   },
   {
+    name: "Drake Contracting",
+    link: "https://drakegc.com",
+    image: "/drakegc.png",
+    description: "An SEO-optimized and informative website for Drake General Contracting.",
+    tech: ["", "SEO Optimization", "Responsive Design"],
+    category: "Web Development",
+    featured: false,
+  },
+  {
     name: "Nashville Maps",
     link: "https://motley-stealer-5b1.notion.site/Nashville-TN-Real-Estate-Listing-Maps-2531d8dcfa7e80c69e4de761e4912f41?source=copy_link",
     image: "/whitley-maps.png",
