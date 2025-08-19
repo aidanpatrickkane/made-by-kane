@@ -34,9 +34,9 @@ const featuredProjects = [
     link: "https://apps.apple.com/us/app/friend-group-leader/id6744416226",
     image: "/friend-group-leader.png",
     description: "A mobile app for generating comedic group photo insights using custom AI analysis.",
-    tech: ["React Native", "Expo", "Firebase", "OpenAI API"],
+    tech: ["1K+ Users", "$400+ Revenue", "React Native", "Firebase"],
     category: "App Development",
-    featured: true,
+    featured: false,
   },
 ]
 
@@ -45,10 +45,10 @@ const additionalProjects = [
     name: "Mitch Harris",
     link: "https://mitchharris.com",
     image: "/mitch-harris-hero.png",
-    description: "An online showcase for Mitch Harris highlighting his journey from Navy veteran to MLB pitcher, speaker, and author, while promoting his new book.",
+    description: "An online showcase for Mitch Harris highlighting his journey from Navy veteran to MLB pitcher, speaker, and author, while promoting his bestselling new book.",
     tech: ["Custom Shop", "Booking Form"],
     category: "Web Development",
-    featured: false,
+    featured: true,
   },
   {
     name: "ROAM Performance",
