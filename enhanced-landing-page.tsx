@@ -158,34 +158,46 @@ export default function EnhancedLandingPage() {
   const displayedProjects = showAllProjects ? filteredProjects : featuredProjects
 
   const handleViewAllProjects = () => {
-  if (!showAllProjects) {
-    setIsTransitioning(true);
-    setShowAllProjects(true);
-    setSelectedCategory("All");
-
-    // wait for React commit + browser paint, then scroll
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        if (projectsRef.current) {
-          const y = projectsRef.current.offsetTop + 120; // push a bit below the top
-          window.scrollTo({ top: y, behavior: "smooth" });
-        }
-        setIsTransitioning(false);
-      });
-    });
-  } else {
-    setIsTransitioning(true);
-    viewAllButtonRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
-    setTimeout(() => {
-      setShowAllProjects(false);
+    if (!showAllProjects) {
+      setIsTransitioning(true);
+      setShowAllProjects(true);
       setSelectedCategory("All");
-      setIsTransitioning(false);
-    }, 300);
+
+      // wait for React commit + browser paint, then scroll
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (projectsRef.current) {
+            const y = projectsRef.current.offsetTop + 120; // push a bit below the top
+            window.scrollTo({ top: y, behavior: "smooth" });
+          }
+          setIsTransitioning(false);
+        });
+      });
+    } else {
+      setIsTransitioning(true);
+      viewAllButtonRef.current?.scrollIntoView({ behavior: "smooth", block: "center" });
+      setTimeout(() => {
+        setShowAllProjects(false);
+        setSelectedCategory("All");
+        setIsTransitioning(false);
+      }, 300);
+    }
+  };
+
+  const smoothScrollTo = (elementId: string) => {
+    const element = document.getElementById(elementId)
+    if (element) {
+      const headerHeight = 80 // Account for sticky header
+      const elementPosition = element.offsetTop - headerHeight
+      window.scrollTo({
+        top: elementPosition,
+        behavior: "smooth",
+      })
+    }
   }
-};
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans flex flex-col overflow-x-hidden">
+    <div className="min-h-screen bg-slate-50 text-slate-900 font-sans">
       {/* ───────────────────────── Navbar ────────────────────────── */}
       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-200/50 shadow-sm">
         <nav className="max-w-7xl mx-auto flex items-center justify-between py-4 px-6">
@@ -198,15 +210,24 @@ export default function EnhancedLandingPage() {
             </span>
           </Link>
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="#projects" className="text-slate-600 hover:text-sky-600 transition-colors font-medium">
+            <button
+              onClick={() => smoothScrollTo("projects")}
+              className="text-slate-600 hover:text-sky-600 hover:cursor-pointer transition-colors font-medium"
+            >
               Work
-            </Link>
-            <Link href="#services" className="text-slate-600 hover:text-sky-600 transition-colors font-medium">
+            </button>
+            <button
+              onClick={() => smoothScrollTo("services")}
+              className="text-slate-600 hover:text-sky-600 hover:cursor-pointer transition-colors font-medium"
+            >
               Services
-            </Link>
-            <Link href="#about" className="text-slate-600 hover:text-sky-600 transition-colors font-medium">
-              About
-            </Link>
+            </button>
+            <button
+              onClick={() => (window.location.href = "sms:7037135390")}
+              className="text-slate-600 hover:text-sky-600 hover:cursor-pointer transition-colors font-medium"
+            >
+              Contact
+            </button>
           </div>
           <Button asChild size="sm" className="shadow-lg hover:shadow-xl transition-shadow">
             <Link href="https://calendly.com/kaneaidan12/made-by-kane-chat">Book Free Consult</Link>
@@ -261,20 +282,19 @@ export default function EnhancedLandingPage() {
           </p>
 
           <div className="flex gap-6 flex-wrap justify-center mt-8">
-            <Button
-              size="lg"
-              asChild
-              className="shadow-2xl hover:shadow-sky-500/25 hover:scale-105 transition-all duration-300"
+            <button
+              onClick={() => smoothScrollTo("projects")}
+              className="inline-flex items-center justify-center font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-xl disabled:opacity-50 disabled:pointer-events-none px-8 py-4 text-lg bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 text-white focus:ring-sky-500 shadow-lg hover:shadow-xl hover:shadow-sky-500/25 hover:scale-105 hover:cursor-pointer"
             >
-              <Link href="#projects">See My Work</Link>
-            </Button>
+              See My Work
+            </button>
             <Button
               variant="outline"
               size="lg"
               asChild
               className="backdrop-blur-sm bg-white/70 hover:bg-white/90 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300"
             >
-              <Link href="#contact">Free Strategy Call</Link>
+              <Link href="https://calendly.com/kaneaidan12/made-by-kane-chat">Free Strategy Call</Link>
             </Button>
           </div>
 
@@ -607,15 +627,15 @@ export default function EnhancedLandingPage() {
             </div>
 
             <div className="flex items-center gap-8">
-              <Link href="#projects" className="hover:text-sky-400 transition-colors">
+              <button onClick={() => smoothScrollTo("projects")} className="hover:text-sky-400 hover:cursor-pointer transition-colors">
                 Work
-              </Link>
-              <Link href="#services" className="hover:text-sky-400 transition-colors">
+              </button>
+              <button onClick={() => smoothScrollTo("services")} className="hover:text-sky-400 hover:cursor-pointer transition-colors">
                 Services
-              </Link>
-              <Link href="#contact" className="hover:text-sky-400 transition-colors">
+              </button>
+              <button onClick={() => smoothScrollTo("contact")} className="hover:text-sky-400 hover:cursor-pointer transition-colors">
                 Contact
-              </Link>
+              </button>
             </div>
 
             <div className="text-sm">© {new Date().getFullYear()} Made by Kane. All rights reserved.</div>
