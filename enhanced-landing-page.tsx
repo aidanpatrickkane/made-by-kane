@@ -46,7 +46,7 @@ const additionalProjects = [
     link: "https://apps.apple.com/us/app/friend-group-leader/id6744416226",
     image: "/friend-group-leader.png",
     description: "A mobile app for generating comedic group photo insights using custom AI analysis.",
-    tech: ["1K+ Users", "$400+ Revenue", "React Native", "Firebase"],
+    tech: ["2.5K+ Users", "$400+ Revenue", "React Native", "Firebase"],
     category: "App Development",
     featured: false,
   },
