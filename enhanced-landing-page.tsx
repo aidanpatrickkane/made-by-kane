@@ -2,13 +2,19 @@
 
 import Image from "next/image"
 import Link from "next/link"
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
 import { Button, Card, CardContent, CardHeader } from "./components/UIComponents"
 
 /* Enhanced accent colors for more visual depth */
 const ACCENT = "sky-500"
 
-/* ---------------------------- Data (mock) ----------------------------- */
+/* ---------------------------- Types ----------------------------- */
+interface Testimonial {
+  quote: string
+  author: string
+  company: string
+  avatar: string
+}
 
 const featuredProjects = [
   {
@@ -99,10 +105,16 @@ const additionalProjects = [
 
 const allProjects = [...featuredProjects, ...additionalProjects]
 
-const testimonials = [
+const testimonials: Testimonial[] = [
+  {
+    quote: "He’s very responsive, creative, and professional...can’t recommend him enough!",
+    author: "Liz M.",
+    company: "On Trend Creative Studio",
+    avatar: "/liz-mcshane-1.png",
+  },
   {
     quote: "His design skills are top-notch—clean, beautiful, and exactly what I envisioned!",
-    author: "Caroline O.",
+    author: "Caroline F.",
     company: "Fromm Scratch",
     avatar: "/fromm-photo.png",
   },
@@ -142,6 +154,135 @@ const services = [
 ]
 
 /* ----------------------------- Component ------------------------------ */
+function TestimonialsCarousel({ testimonials }: { testimonials: Testimonial[] }) {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+
+  // Auto-advance testimonials
+  useEffect(() => {
+    if (!isAutoPlaying) return
+
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % testimonials.length)
+    }, 5000)
+
+    return () => clearInterval(interval)
+  }, [testimonials.length, isAutoPlaying])
+
+  const goToSlide = (index: number) => {
+    setCurrentIndex(index)
+    setIsAutoPlaying(false)
+    // Resume auto-play after 10 seconds
+    setTimeout(() => setIsAutoPlaying(true), 10000)
+  }
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length)
+    setIsAutoPlaying(false)
+    setTimeout(() => setIsAutoPlaying(true), 10000)
+  }
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+    setIsAutoPlaying(false)
+    setTimeout(() => setIsAutoPlaying(true), 10000)
+  }
+
+  return (
+    <div className="relative">
+      {/* Main testimonial display */}
+      <div className="relative overflow-hidden rounded-3xl">
+        <div
+          className="flex transition-transform duration-700 ease-in-out"
+          style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+        >
+          {testimonials.map((testimonial: Testimonial, index: number) => (
+            <div key={index} className="w-full flex-shrink-0 px-4">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 md:p-12 text-center max-w-4xl mx-auto">
+                {/* Quote */}
+                <div className="mb-8">
+                  <svg
+                    className="w-12 h-12 text-sky-300 mx-auto mb-6 opacity-50"
+                    fill="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z" />
+                  </svg>
+                  <blockquote className="text-2xl md:text-3xl font-light leading-relaxed italic text-white">
+                    "{testimonial.quote}"
+                  </blockquote>
+                </div>
+
+                {/* Author info */}
+                <div className="flex items-center justify-center gap-4">
+                  <Image
+                    src={testimonial.avatar || "/placeholder.svg"}
+                    alt={testimonial.author}
+                    width={80}
+                    height={80}
+                    className="rounded-full border-3 border-white/30 shadow-lg"
+                  />
+                  <div className="text-left">
+                    <div className="font-semibold text-xl text-white">{testimonial.author}</div>
+                    <div className="text-sky-300 text-lg">{testimonial.company}</div>
+                    <div className="flex text-yellow-400 mt-2">⭐⭐⭐⭐⭐</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Navigation arrows */}
+      {testimonials.length > 1 && (
+        <>
+          <button
+            onClick={prevSlide}
+            className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
+          <button
+            onClick={nextSlide}
+            className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/10 hover:bg-white/20 backdrop-blur-sm border border-white/20 rounded-full flex items-center justify-center text-white transition-all duration-300 hover:scale-110"
+          >
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+        </>
+      )}
+
+      {/* Dots indicator */}
+      {testimonials.length > 1 && (
+        <div className="flex justify-center gap-3 mt-8">
+          {testimonials.map((_: Testimonial, index: number) => (
+            <button
+              key={index}
+              onClick={() => goToSlide(index)}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                index === currentIndex ? "bg-sky-400 scale-125" : "bg-white/30 hover:bg-white/50"
+              }`}
+            />
+          ))}
+        </div>
+      )}
+
+      {/* Auto-play indicator */}
+      {testimonials.length > 1 && (
+        <div className="flex justify-center mt-4">
+          <div className="flex items-center gap-2 text-sky-300 text-sm">
+            <div className={`w-2 h-2 rounded-full ${isAutoPlaying ? "bg-green-400 animate-pulse" : "bg-slate-400"}`} />
+            <span>{isAutoPlaying ? "Auto-playing" : "Paused"}</span>
+          </div>
+        </div>
+      )}
+    </div>
+  )
+}
 
 export default function EnhancedLandingPage() {
   const [showAllProjects, setShowAllProjects] = useState(false)
@@ -489,23 +630,6 @@ export default function EnhancedLandingPage() {
         </div>
       </section>
 
-      {/* ──────────────────────── Stats ─────────────────────────── */}
-      <section className="py-24 px-6 bg-white">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid md:grid-cols-3 gap-12 text-center">
-            {stats.map((stat, index) => (
-              <div key={stat.label} className="group" style={{ animationDelay: `${index * 0.2}s` }}>
-                <div className="text-5xl mb-4 group-hover:scale-110 transition-transform duration-300">{stat.icon}</div>
-                <p className="text-6xl font-black mb-2 bg-gradient-to-r from-sky-600 to-indigo-600 bg-clip-text text-transparent">
-                  {stat.value}
-                </p>
-                <p className="uppercase tracking-wider text-sm text-slate-500 font-medium">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ───────────────────── Testimonials ─────────────────────── */}
       <section className="bg-gradient-to-br from-slate-900 to-slate-800 py-24 px-6 text-white relative overflow-hidden">
         {/* Background pattern */}
@@ -513,7 +637,7 @@ export default function EnhancedLandingPage() {
           <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-sky-500/20 to-transparent" />
         </div>
 
-        <div className="max-w-4xl mx-auto relative z-10">
+        <div className="max-w-6xl mx-auto relative z-10">
           <div className="text-center mb-16">
             <h2 className="text-5xl font-bold mb-6 text-white">Client Success Stories</h2>
             <p className="text-xl text-slate-300 max-w-2xl mx-auto">
@@ -521,33 +645,8 @@ export default function EnhancedLandingPage() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <Card
-                key={index}
-                className="bg-white/10 backdrop-blur-sm border-white/20 text-white hover:bg-white/15 transition-all duration-300"
-                style={{ animationDelay: `${index * 0.2}s` }}
-              >
-                <CardContent className="p-8">
-                  <div className="flex items-start gap-4 mb-6">
-                    <Image
-                      src={testimonial.avatar || "/placeholder.svg"}
-                      alt={testimonial.author}
-                      width={60}
-                      height={60}
-                      className="rounded-full border-2 border-white/20"
-                    />
-                    <div>
-                      <div className="font-semibold text-lg">{testimonial.author}</div>
-                      <div className="text-sky-300 text-sm">{testimonial.company}</div>
-                    </div>
-                  </div>
-                  <blockquote className="text-lg leading-relaxed italic">"{testimonial.quote}"</blockquote>
-                  <div className="flex text-yellow-400 mt-4">⭐⭐⭐⭐⭐</div>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          {/* Testimonials Carousel */}
+          <TestimonialsCarousel testimonials={testimonials} />
         </div>
       </section>
 
