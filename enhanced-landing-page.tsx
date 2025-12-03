@@ -107,6 +107,12 @@ const allProjects = [...featuredProjects, ...additionalProjects]
 
 const testimonials: Testimonial[] = [
   {
+    quote: "Aidan has been unbelievable to work with. The website exceeded my expectations and was done in a very timely manner.",
+    author: "Cole E.",
+    company: "North Jackson Contractors",
+    avatar: "/cole-elrod-headshot.png",
+  },
+  {
     quote: "He’s very responsive, creative, and professional...can’t recommend him enough!",
     author: "Liz M.",
     company: "On Trend Creative Studio",
