@@ -113,6 +113,12 @@ const testimonials: Testimonial[] = [
     avatar: "/cole-elrod-headshot.png",
   },
   {
+    quote: "Aidan walked me through each step of the process, explained things clearly, and made countless modifications until everything looked and worked the way I wanted. I appreciated his attention to detail and his willingness to go above and beyond to make sure I was happy with the final product. I highly recommend Aidan for anyone looking for help with web design and setup!",
+    author: "Phyllis C.",
+    company: "North Jackson Contractors",
+    avatar: "/cole-elrod-headshot.png",
+  },
+  {
     quote: "He’s very responsive, creative, and professional...can’t recommend him enough!",
     author: "Liz M.",
     company: "On Trend Creative Studio",
@@ -194,6 +200,25 @@ function TestimonialsCarousel({ testimonials }: { testimonials: Testimonial[] })
     setTimeout(() => setIsAutoPlaying(true), 10000)
   }
 
+  // Function to determine text size based on quote length
+  const getQuoteTextSize = (quote: string) => {
+    const length = quote.length
+    
+    if (length < 100) {
+      // Short quotes: large text
+      return "text-3xl md:text-4xl"
+    } else if (length < 200) {
+      // Medium quotes: medium-large text
+      return "text-2xl md:text-3xl"
+    } else if (length < 300) {
+      // Long quotes: medium text
+      return "text-xl md:text-2xl"
+    } else {
+      // Very long quotes: smaller text
+      return "text-lg md:text-xl"
+    }
+  }
+
   return (
     <div className="relative">
       {/* Main testimonial display */}
@@ -204,7 +229,7 @@ function TestimonialsCarousel({ testimonials }: { testimonials: Testimonial[] })
         >
           {testimonials.map((testimonial: Testimonial, index: number) => (
             <div key={index} className="w-full flex-shrink-0 px-4">
-              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 md:p-12 text-center max-w-4xl mx-auto">
+              <div className="bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 md:p-12 text-center max-w-4xl mx-auto min-h-[400px] flex flex-col justify-center">
                 {/* Quote */}
                 <div className="mb-8">
                   <svg
@@ -214,7 +239,7 @@ function TestimonialsCarousel({ testimonials }: { testimonials: Testimonial[] })
                   >
                     <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z" />
                   </svg>
-                  <blockquote className="text-2xl md:text-3xl font-light leading-relaxed italic text-white">
+                  <blockquote className={`${getQuoteTextSize(testimonial.quote)} font-light leading-relaxed italic text-white`}>
                     "{testimonial.quote}"
                   </blockquote>
                 </div>
