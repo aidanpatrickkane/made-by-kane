@@ -419,7 +419,7 @@ export default function EnhancedLandingPage() {
           </h1>
 
           <p className="text-xl md:text-2xl max-w-3xl text-slate-600 leading-relaxed font-light">
-            High‑performing websites & apps that earn trust, rank higher, and convert visitors into loyal customers.
+            Based out of Atlanta and Athens, GA, I provide high‑performing websites & apps that earn trust, rank higher, and convert visitors into loyal customers.
           </p>
 
           <div className="flex gap-6 flex-wrap justify-center mt-8">
