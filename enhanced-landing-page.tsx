@@ -113,10 +113,10 @@ const testimonials: Testimonial[] = [
     avatar: "/cole-elrod-headshot.png",
   },
   {
-    quote: "Aidan walked me through each step of the process, explained things clearly, and made countless modifications until everything looked and worked the way I wanted. I appreciated his attention to detail and his willingness to go above and beyond to make sure I was happy with the final product. I highly recommend Aidan for anyone looking for help with web design and setup!",
-    author: "Phyllis C.",
-    company: "North Jackson Contractors",
-    avatar: "/cole-elrod-headshot.png",
+    quote: "Working with Aidan on my baking blog was an absolute pleasure! His design skills are top-notch—clean, beautiful, and exactly what I envisioned. He was quick to respond throughout the process and made everything so easy and stress-free. Highly recommend Aidan if you want a site that looks amazing and works seamlessly!",
+    author: "Caroline F.",
+    company: "Fromm Scratch",
+    avatar: "/fromm-photo.png",
   },
   {
     quote: "He’s very responsive, creative, and professional...can’t recommend him enough!",
@@ -125,10 +125,10 @@ const testimonials: Testimonial[] = [
     avatar: "/liz-mcshane-1.png",
   },
   {
-    quote: "His design skills are top-notch—clean, beautiful, and exactly what I envisioned!",
-    author: "Caroline F.",
-    company: "Fromm Scratch",
-    avatar: "/fromm-photo.png",
+    quote: "Aidan walked me through each step of the process, explained things clearly, and made countless modifications until everything looked and worked the way I wanted. I appreciated his attention to detail and his willingness to go above and beyond to make sure I was happy with the final product. I highly recommend Aidan for anyone looking for help with web design and setup!",
+    author: "Phyllis C.",
+    company: "AdvocateSEA",
+    avatar: "/phyllis-caplan-headshot.png",
   },
   {
     quote: "Aidan created a specific, elaborate and creative map for me...highly recommend!",
