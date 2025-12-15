@@ -578,7 +578,7 @@ export default function EnhancedLandingPage() {
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
+                  className={`px-6 py-3 rounded-full font-medium hover:cursor-pointer transition-all duration-300 ${
                     selectedCategory === category
                       ? "bg-sky-500 text-white shadow-lg"
                       : "bg-white text-slate-600 hover:bg-sky-50 hover:text-sky-600 shadow-sm"
