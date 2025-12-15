@@ -48,6 +48,15 @@ const featuredProjects = [
 
 const additionalProjects = [
   {
+    name: "The Cotton Rail",
+    link: "https://thecottonrail.com",
+    image: "/cotton-rail.png",
+    description: "A marketing and e-commerce website for a gift shop in Bishop, Georgia.",
+    tech: ["Shopify Integration", "Advanced Animations"],
+    category: "Web Development",
+    featured: false,
+  },
+  {
     name: "Friend Group Leader",
     link: "https://apps.apple.com/us/app/friend-group-leader/id6744416226",
     image: "/friend-group-leader.png",
