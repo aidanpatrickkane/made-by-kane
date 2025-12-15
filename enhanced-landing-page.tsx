@@ -18,6 +18,15 @@ interface Testimonial {
 
 const featuredProjects = [
   {
+    name: "Bridgenet Corp",
+    link: "https://bridgenetcorp.com",
+    image: "/bridgenet-hero.png",
+    description: "A sleek and professional marketing and lead-capturing website for an IT staffing agency.",
+    tech: ["Framer", "Custom Backend Integration"],
+    category: "Web Development",
+    featured: true,
+  },
+  {
     name: "Classic Team Realty",
     link: "https://classicteamrealty.com",
     image: "/classic-realty.png",
@@ -35,15 +44,6 @@ const featuredProjects = [
     category: "Web Development",
     featured: true,
   },
-  {
-    name: "Bridgenet Corp",
-    link: "https://bridgenetcorp.com",
-    image: "/bridgenet-hero.png",
-    description: "A sleek and professional marketing and lead-capturing website for an IT staffing agency.",
-    tech: ["Framer", "Custom Backend Integration"],
-    category: "Web Development",
-    featured: true,
-  },
 ]
 
 const additionalProjects = [
@@ -53,6 +53,15 @@ const additionalProjects = [
     image: "/friend-group-leader.png",
     description: "A mobile app for generating comedic group photo insights using custom AI analysis.",
     tech: ["2.5K+ Users", "$400+ Revenue", "React Native", "Firebase"],
+    category: "App Development",
+    featured: false,
+  },
+  {
+    name: "Lookin' Up",
+    link: "https://apps.apple.com/us/app/lookin-up/id6753089492",
+    image: "/lookin-up.png",
+    description: "A mobile app providing once-daily, long-form inspirational content.",
+    tech: ["MongoDB", "Vercel Serverless Functions", "SwiftUI"],
     category: "App Development",
     featured: false,
   },
