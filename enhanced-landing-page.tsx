@@ -790,7 +790,12 @@ export default function EnhancedLandingPage() {
               <button onClick={() => smoothScrollTo("services")} className="hover:text-sky-400 hover:cursor-pointer transition-colors">
                 Services
               </button>
-              <button onClick={() => smoothScrollTo("contact")} className="hover:text-sky-400 hover:cursor-pointer transition-colors">
+              <button
+                onClick={() => {
+                  window.location.href = "https://calendly.com/kaneaidan12/made-by-kane-chat";
+                }}
+                className="hover:text-sky-400 hover:cursor-pointer transition-colors"
+              >
                 Contact
               </button>
             </div>
