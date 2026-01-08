@@ -18,6 +18,15 @@ interface Testimonial {
 
 const featuredProjects = [
   {
+    name: "Athens Healthcare for Women",
+    link: "https://athenshealthcareforwomen.org",
+    image: "/ahcw.png",
+    description: "A welcoming website for Athens Healthcare for Women.",
+    tech: ["Payment Portal", "Video Embeddings", "In-depth Profiles"],
+    category: "Web Development",
+    featured: true,
+  },
+  {
     name: "Bridgenet Corp",
     link: "https://bridgenetcorp.com",
     image: "/bridgenet-hero.png",
@@ -35,6 +44,9 @@ const featuredProjects = [
     category: "Web Development",
     featured: true,
   },
+]
+
+const additionalProjects = [
   {
     name: "Fromm Scratch",
     link: "https://frommscratch.com",
@@ -42,11 +54,8 @@ const featuredProjects = [
     description: "A warm and inviting baking and lifestyle blog by Caroline Fromm.",
     tech: ["Squarespace", "SEO Optimization", "Responsive Design"],
     category: "Web Development",
-    featured: true,
+    featured: false,
   },
-]
-
-const additionalProjects = [
   {
     name: "The Cotton Rail",
     link: "https://thecottonrail.com",
