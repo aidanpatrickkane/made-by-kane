@@ -640,7 +640,7 @@ export default function EnhancedLandingPage() {
                 <CardContent className="p-6 space-y-4">
                   <div className="flex items-center justify-between">
                     <h3 className="font-bold text-xl text-slate-900">{project.name}</h3>
-                    <span className="text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded-full">
+                    <span className="text-xs text-slate-500 bg-slate-100 px-2 py-1 rounded-full text-center">
                       {project.category}
                     </span>
                   </div>
