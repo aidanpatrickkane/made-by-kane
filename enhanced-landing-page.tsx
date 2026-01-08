@@ -18,7 +18,7 @@ interface Testimonial {
 
 const featuredProjects = [
   {
-    name: "Athens Healthcare for Women",
+    name: "AHCW",
     link: "https://athenshealthcareforwomen.org",
     image: "/ahcw.png",
     description: "A welcoming website for Athens Healthcare for Women.",
