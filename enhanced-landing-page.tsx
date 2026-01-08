@@ -437,7 +437,7 @@ export default function EnhancedLandingPage() {
               Contact
             </button>
           </div>
-          <Button asChild size="sm" className="shadow-lg hover:shadow-xl transition-shadow">
+          <Button asChild size="sm" className="shadow-lg hover:shadow-xl transition-shadow text-center">
             <Link href="https://calendly.com/kaneaidan12/made-by-kane-chat">Book Free Consult</Link>
           </Button>
         </nav>
