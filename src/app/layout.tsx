@@ -13,11 +13,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Made by Kane",
-  description: "The online home of Made by Kane, a website & app development studio that turns your business' vision into excellent digital products.",
+  title: "Made by Kane | Website & Mobile App Development Atlanta | Local SEO",
+description: "Atlanta developer specializing in custom websites, mobile apps, business automation, and local SEO for small businesses in Atlanta and Athens, GA.",
   openGraph: {
-    title: "Made by Kane",
-    description: "The online home of Made by Kane, a website & app development studio that turns your business' vision into excellent digital products.",
+    title: "Made by Kane | Website & Mobile App Development Atlanta | Local SEO",
+description: "Atlanta developer specializing in custom websites, mobile apps, business automation, and local SEO for small businesses in Atlanta and Athens, GA.",
     images: [
       {
         url: "https://madebykane.com/icon.png",

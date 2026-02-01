@@ -410,9 +410,6 @@ export default function EnhancedLandingPage() {
       <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-slate-200/50 shadow-sm">
         <nav className="max-w-7xl mx-auto flex items-center justify-between py-4 px-6">
           <Link href="#" className="group flex items-center space-x-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-sky-400 to-sky-600 rounded-lg flex items-center justify-center text-white font-bold text-sm transform group-hover:rotate-12 transition-transform duration-300">
-              K
-            </div>
             <span className="text-2xl font-bold bg-gradient-to-r from-slate-900 to-slate-600 bg-clip-text text-transparent">
               Made by Kane
             </span>
@@ -478,10 +475,10 @@ export default function EnhancedLandingPage() {
             Available for new projects
           </div>
 
-          <h1 className="text-6xl md:text-8xl font-black leading-tight max-w-5xl">
-            <span className="block">Digital Products</span>
+          <h1 className="text-6xl md:text-7xl font-black leading-tight max-w-5xl select-none">
+            <span className="block">Digital Products That</span>
             <span className="block bg-gradient-to-r from-sky-600 via-sky-500 to-indigo-600 bg-clip-text text-transparent">
-              Built to Impress
+              Drive Real Results
             </span>
           </h1>
 
@@ -786,9 +783,6 @@ export default function EnhancedLandingPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-sky-400 to-sky-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">
-                K
-              </div>
               <span className="text-xl font-bold text-white">Made by Kane</span>
             </div>
 
